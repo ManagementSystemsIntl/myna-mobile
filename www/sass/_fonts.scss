@@ -1,0 +1,128 @@
+// Open Sans
+@font-face {
+	font-family: 'Open Sans';
+	src: url('../fonts/subset-OpenSans-Regular.woff2') format('woff2'),
+		url('../fonts/subset-OpenSans-Regular.woff') format('woff'),
+		url('../fonts/subset-OpenSans-Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Open Sans';
+	src: url('../fonts/subset-OpenSans-Italic.woff2') format('woff2'),
+		url('../fonts/subset-OpenSans-Italic.woff') format('woff'),
+		url('../fonts/subset-OpenSans-Italic.ttf') format('truetype');
+	font-weight: normal;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Open Sans';
+	src: url('../fonts/subset-OpenSans-BoldItalic.woff2') format('woff2'),
+		url('../fonts/subset-OpenSans-BoldItalic.woff') format('woff'),
+		url('../fonts/subset-OpenSans-BoldItalic.ttf') format('truetype');
+	font-weight: bold;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Open Sans';
+	src: url('../fonts/subset-OpenSans-Bold.woff2') format('woff2'),
+		url('../fonts/subset-OpenSans-Bold.woff') format('woff'),
+		url('../fonts/subset-OpenSans-Bold.ttf') format('truetype');
+	font-weight: bold;
+	font-style: normal;
+}
+
+// Roboto Condensed
+@font-face {
+	font-family: 'Roboto Condensed';
+	src: url('../fonts/subset-RobotoCondensed-Bold.woff2') format('woff2'),
+		url('../fonts/subset-RobotoCondensed-Bold.woff') format('woff'),
+		url('../fonts/subset-RobotoCondensed-Bold.ttf') format('truetype');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Roboto Condensed';
+	src: url('../fonts/subset-RobotoCondensed-Regular.woff2') format('woff2'),
+		url('../fonts/subset-RobotoCondensed-Regular.woff') format('woff'),
+		url('../fonts/subset-RobotoCondensed-Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Roboto Condensed';
+	src: url('../fonts/subset-RobotoCondensed-Light.woff2') format('woff2'),
+		url('../fonts/subset-RobotoCondensed-Light.woff') format('woff'),
+		url('../fonts/subset-RobotoCondensed-Light.ttf') format('truetype');
+	font-weight: 300;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Roboto Condensed';
+	src: url('../fonts/subset-RobotoCondensed-LightItalic.woff2') format('woff2'),
+		url('../fonts/subset-RobotoCondensed-LightItalic.woff') format('woff'),
+		url('../fonts/subset-RobotoCondensed-LightItalic.ttf') format('truetype');
+	font-weight: 300;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Roboto Condensed';
+	src: url('../fonts/subset-RobotoCondensed-BoldItalic.woff2') format('woff2'),
+		url('../fonts/subset-RobotoCondensed-BoldItalic.woff') format('woff'),
+		url('../fonts/subset-RobotoCondensed-BoldItalic.ttf') format('truetype');
+	font-weight: bold;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Roboto Condensed';
+	src: url('../fonts/subset-RobotoCondensed-Italic.woff2') format('woff2'),
+		url('../fonts/subset-RobotoCondensed-Italic.woff') format('woff'),
+		url('../fonts/subset-RobotoCondensed-Italic.ttf') format('truetype');
+	font-weight: normal;
+	font-style: italic;
+}
+
+// Amiri - easy to read arabic script
+@font-face {
+	font-family: 'Amiri';
+	src: url('../fonts/subset-Amiri-Bold.woff2') format('woff2'),
+		url('../fonts/subset-Amiri-Bold.woff') format('woff'),
+		url('../fonts/subset-Amiri-Bold.ttf') format('truetype');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Amiri';
+	src: url('../fonts/subset-Amiri-Regular.woff2') format('woff2'),
+		url('../fonts/subset-Amiri-Regular.woff') format('woff'),
+		url('../fonts/subset-Amiri-Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Amiri';
+	src: url('../fonts/subset-Amiri-BoldItalic.woff2') format('woff2'),
+		url('../fonts/subset-Amiri-BoldItalic.woff') format('woff'),
+		url('../fonts/subset-Amiri-BoldItalic.ttf') format('truetype');
+	font-weight: bold;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Amiri';
+	src: url('../fonts/subset-Amiri-Italic.woff2') format('woff2'),
+		url('../fonts/subset-Amiri-Italic.woff') format('woff'),
+		url('../fonts/subset-Amiri-Italic.ttf') format('truetype');
+	font-weight: normal;
+	font-style: italic;
+}

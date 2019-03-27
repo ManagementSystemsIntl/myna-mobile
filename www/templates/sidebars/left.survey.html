@@ -1,0 +1,62 @@
+<div style="height:100%;">
+  <div class="scrollable-header">
+    <h3 class="app-name"><b>{{'SURVEY_INFO' | i18n}}</b></h3>
+    <div class="list-group-item spacer"></div>
+    <a href="#" class="list-group-item sidebar-btn" ng-class="{disabled: !params.skippable, 'btn-default': !params.skippable, 'btn-primary': params.skippable}" ng-click="skip()" ui-turn-off="sidebar-left">
+      <b><i class="fa fa-fw fa-arrow-right"></i> {{params.revisited ? 'NEXT_TASK' : 'SKIP_TASK' | i18n}}</b>
+    </a>
+    <!-- <a href="#" class="list-group-item sidebar-btn" ng-class="{disabled: params.first, 'btn-default': params.first, 'btn-primary': !params.first}" ng-click="back()" ui-turn-off="sidebar-left">
+      <b><i class="fa fa-fw fa-arrow-left"></i> {{'PREVIOUS_TASK' | i18n}}</b>
+    </a> -->
+    <a href="#" class="list-group-item sidebar-btn btn-warning" ng-click="pause()" ui-turn-off="sidebar-left">
+      <b><i class="fa fa-fw fa-sign-out"></i> {{'LEAVE_SURVEY' | i18n}}</b>
+    </a>
+    <div class="list-group-item spacer"></div>
+    <div class="list-group-item">
+      <b>{{'RESPONSE_ID' | i18n:language}}: {{info.doc_id}}</b>
+    </div>
+    <div class="list-group-item" ng-click="showInfo = !showInfo">
+      <b><i class="fa fa-fw fa-table"></i> {{'VIEW_INFO' | i18n:language}}  <i class="fa fa-fw" ng-class="{'fa-caret-up': !showInfo, 'fa-caret-down': showInfo}"></i></b>
+    </div>
+  </div>
+  <div class="scrollable-content">
+    <div class="list-group" ng-show="showInfo">
+      <div class="list-group-item">
+        {{'SURVEY_NAME' | i18n:language}}: {{info.survey_name | i18n:language}}
+      </div>
+      <div class="list-group-item">
+        {{'GRADE' | i18n:language}}: {{info.grade | i18n:language}}
+      </div>
+      <div class="list-group-item">
+        {{'STUDENT_CODE' | i18n:language}}: {{info.student_unique_code}}
+      </div>
+      <div class="list-group-item">
+        {{'START_TIME' | i18n:language}}: {{info.survey_started | dateDisplay}}
+      </div>
+      <div class="list-group-item" ng-show="info.training_entry || info.irr_entry"></div>
+      <div class="list-group-item" ng-show="info.training_entry">
+        {{'TRAINING_ENTRY' | i18n:language}}: {{info.gold_standard | i18n:langugae}}
+      </div>
+      <div class="list-group-item" ng-show="info.irr_entry">
+        {{'IRR_ENTRY' | i18n:language}}: {{info.irr_student_code}}
+      </div>
+      <div class="list-group-item"></div>
+      <div class="list-group-item">
+        {{'ENUMERATOR_ID' | i18n:language}}: {{info.enumerator_id}}
+      </div>
+      <div class="list-group-item">
+        {{'ENUMERATOR_NAME' | i18n:language}}: {{info.enumerator_name}}
+      </div>
+      <div class="list-group-item">
+        {{'GEO_SCHOOL_CODE' | i18n:language}}: {{info.school_code}}
+      </div>
+    </div>
+  </div>
+  <div class="scrollable-footer">
+    <div class="list-group-item spacer"></div>
+    <a href="#" class="list-group-item sidebar-btn btn-danger" ng-click="quit()" ui-turn-off="sidebar-left">
+      <b><i class="fa fa-fw fa-warning"></i> {{'QUIT_SURVEY' | i18n}}</b>
+    </a>
+    <div class="list-group-item spacer"></div>
+  </div>
+</div>

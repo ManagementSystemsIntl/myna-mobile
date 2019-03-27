@@ -1,0 +1,25 @@
+<div class="scrollable">
+  <div class="scrollable-content">
+    <div class="list-group">
+      <div class="list-group-item list-group-item-home">
+        <form class="col-xs-12 egra-form" name="surveyForm"
+          sf-schema="vm.schema"
+          sf-form="vm.form"
+          sf-model="vm.surveymodel"
+          ng-submit="vm.submit()"></form>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <div ng-if="vm.gridKeys.length > 0 && !vm.submited">
+          <div ng-repeat="(key, grid) in vm.grids">
+            <div class='timer cf' grid-directive time="{{grid.timer}}" autostop="{{grid.autostop}}" name="{{grid.name}}" position="{{grid.position}}" render="{{grid.render || false}}"></div>
+          </div>
+        </div>
+        <div ng-if="vm.timerKeys.length > 0 && !vm.submited">
+          <div ng-repeat="(key, timer) in vm.timers">
+            <div class='timer cf' timer-directive time="{{timer.timer}}" name="{{timer.name}}" position="{{timer.position}}" render="{{timer.render || false}}"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

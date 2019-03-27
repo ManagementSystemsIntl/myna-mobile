@@ -1,0 +1,127 @@
+<div class="btn-group justified home-nav" ng-show="vm.validInfo">
+  <a href="#" class="btn btn-default" ng-click="vm.newSurvey = true" ng-class="{'btn-info': vm.newSurvey}">
+    <b>{{'NEW_SURVEY' | i18n:vm.lang}}</b>
+  </a>
+  <a href="#" class="btn btn-default" ng-click="vm.newSurvey = false" ng-class="{disabled: vm.incomplete.length === 0, 'btn-info': !vm.newSurvey}">
+    <b>{{'EXISTING_SURVEYS' | i18n:vm.lang}} ({{vm.incomplete.length}})</b>
+  </a>
+</div>
+
+<div class="section home-section">
+
+  <div class="row margin-top-20" ng-hide="vm.validInfo">
+    <div class="col-xs-6">
+      <a class="btn btn-block" ui-turn-on="enum" ng-class="{'btn-info': !vm.enumerator.id, 'btn-success': vm.enumerator.id}">
+        <i class="fa fa-fw fa-user fa-4x"></i><br>
+        {{'ENUMERATOR_MODAL' | i18n:vm.lang}}
+      </a>
+    </div>
+    <div class="col-xs-6">
+      <a class="btn btn-block" ui-turn-on="geo" ng-class="{'btn-info': !vm.geo.school_code, 'btn-success': vm.geo.school_code}">
+        <i class="fa fa-fw fa-compass fa-4x"></i><br>
+        {{'GEO_MODAL' | i18n:vm.lang}}
+      </a>
+    </div>
+  </div>
+
+  <div ng-show="vm.newSurvey">
+    <div class="row margin-top-20" ng-show="vm.validInfo">
+      <div class="col-xs-12 margin-top-10" ng-show="vm.grades.length > 0">
+        <label>{{'SELECT_GRADE' | i18n:vm.lang}}</label>
+        <select class="form-control" ng-model="vm.formInfo.grade" ng-options="grade as (grade | i18n:vm.lang) for grade in vm.grades"  ng-required="!vm.formInfo.grade" required ng-change="vm.updateSurveys(vm.formInfo.grade)">
+          <option style="display:none" value="">{{'CHOOSE_GRADE' | i18n:vm.lang}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row margin-top-20" ng-show="vm.validInfo && vm.formInfo.grade">
+      <div class="col-xs-12">
+        <label>{{'SELECT_SURVEY' | i18n:vm.lang}} <em>(<span>{{vm.surveys.length}}</span>)</em></label>
+        <select class="form-control" ng-model="vm.formInfo.survey" ng-options="survey as (survey.survey_info.name | i18n:vm.lang)+' (v.'+survey.survey_info.iteration+')' for survey in vm.surveys" required ng-change="vm.updateGolds(vm.formInfo.survey); vm.validateForm();">
+          <option style="display:none" value="">{{'CHOOSE_SURVEY' | i18n:vm.lang}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row margin-top-20" ng-show="vm.validInfo && vm.formInfo.survey">
+      <div class="col-xs-6" ng-show="vm.formInfo.student_unique_code">
+        <label>{{'STUDENT_CODE' | i18n:vm.lang}}:</label>
+        <span>{{vm.formInfo.student_unique_code}}</span>
+      </div>
+      <div ng-class="{'col-xs-8': !vm.formInfo.student_unique_code, 'col-xs-offset-2': !vm.formInfo.student_unique_code, 'col-xs-6': vm.formInfo.student_unique_code}">
+        <button class="btn btn-info col-xs-12" ng-show="!vm.pupils" type="button" ng-click="vm.generateStudentCode()">
+          <i class="fa fa-fw fa-user"></i>&nbsp;<b>{{'GENERATE_STUDENT_CODE' | i18n:vm.lang}}</b>
+        </button>
+        <button class="btn btn-info col-xs-12" ng-show="vm.pupils" type="button" ui-turn-on="pupils">
+          <i class="fa fa-fw fa-user"></i>&nbsp;<b>{{'FIND_STUDENT' | i18n:vm.lang}}</b>
+        </button>
+      </div>
+      <div class="col-xs-6 text-center margin-top-20">
+        <label>{{'TRAINING_ENTRY' | i18n:vm.lang}}</label>
+        <ui-switch class="centered" ng-model="vm.formInfo.training_entry" ng-change="vm.validateForm()"></ui-switch>
+      </div>
+      <div class="col-xs-6 text-center margin-top-20">
+        <label>{{'IRR_ENTRY' | i18n:vm.lang}}</label>
+        <ui-switch class="centered" ng-model="vm.formInfo.irr_entry" ng-change="vm.validateForm()"></ui-switch>
+      </div>
+    </div>
+    <div class="row margin-top-20" ng-show="vm.validInfo && vm.formInfo.survey && vm.formInfo.training_entry">
+      <div class="col-xs-12 margin-top-10">
+        <label>{{'SELECT_TRAINING' | i18n:vm.lang}}</label>
+        <select class="form-control" ng-model="vm.formInfo.gold_standard" ng-options="gs as (gs | i18n:vm.lang) for gs in vm.golds" ng-required="vm.formInfo.training_entry" ng-change="vm.validateForm()">
+          <option style="display:none" value="">{{'CHOOSE_TRAINING' | i18n:vm.lang}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row margin-top-20" ng-show="vm.validInfo && vm.formInfo.survey && vm.formInfo.irr_entry">
+      <div class="col-xs-12 margin-top-10">
+        <label>{{'IRR_CODE' | i18n:vm.lang}}</label>
+        <input type="text" class="form-control" ng-model="vm.formInfo.irr_student_code" ng-required="vm.formInfo.irr_entry"  pattern="[0-9]*" ng-change="vm.validateForm()">
+      </div>
+      <div class="col-xs-12 margin-top-20">
+        <label>{{'IRR_CODE_CONFIRM' | i18n:vm.lang}}</label>
+        <input type="text" class="form-control" ng-model="vm.formInfo.irr_student_code_confirm" ng-required="vm.formInfo.irr_entry"  pattern="[0-9]*" ng-change="vm.validateForm()">
+      </div>
+    </div>
+    <div class="row margin-top-20" ng-show="vm.validInfo">
+      <div class="col-xs-12">
+        <button class="btn btn-block btn-success" ng-class="{disabled: !vm.validForm || vm.starting}" ng-click="vm.startSurvey()">
+          {{'START_SURVEY' | i18n:vm.lang}}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div ng-hide="vm.newSurvey">
+    <div class="row margin-top-20" ng-show="vm.validInfo">
+      <div class="col-xs-12 margin-top-10" ng-show="vm.incomplete.length > 0" style="height:60vh;">
+        <div class="scrollable">
+          <label style="margin-left:15px;">{{'EXISTING_SURVEYS' | i18n:vm.lang}} ({{vm.incomplete.length}})</label>
+          <div class="list-group scrollable-content">
+            <div class="list-group-item" ng-repeat="response in vm.incomplete" ng-click="vm.formIncomplete = response" ng-class="{active:response._id === vm.formIncomplete._id}">
+              {{response.response_info.survey_name | i18n:vm.lang}}<br>
+              <span ng-hide="response.response_info.grade === 'NO_GRADE'">{{'GRADE' | i18n:vm.lang}}: {{response.response_info.grade | i18n:vm.lang}}</span><span ng-show="response.response_info.grade === 'NO_GRADE'">{{response.response_info.grade | i18n:vm.lang}}</span><br>
+              {{'RESPONSE_ID'| i18n:vm.lang}}: {{response._id}}<br>
+              {{'STUDENT_CODE'| i18n:vm.lang}}: {{response.response_info.student_unique_code}}<br>
+              {{'GEO_SCHOOL_CODE'| i18n:vm.lang}}: {{response.response_info.school_code}}<br>
+              <span ng-show="response.response_info.training_entry">
+                {{'TRAINING_ENTRY' | i18n:language}}: {{response.response_info.gold_standard | i18n:language}}<br>
+              </span>
+              <span ng-show="response.response_info.irr_entry">
+                {{'IRR_ENTRY' | i18n:language}}: {{response.response_info.irr_student_code}}<br>
+              </span>
+              {{'NEXT_SUBTASK'| i18n:vm.lang}}: {{response.progress.upNext | i18n:vm.lang}}<br>
+              {{'LAST_UPDATED'| i18n:vm.lang}}: {{response.progress.updated | dateDisplay:vm.lang}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row margin-top-20" ng-show="vm.validInfo">
+      <div class="col-xs-12 margin-top-20">
+        <button class="btn btn-block btn-success" ng-class="{disabled: !vm.formIncomplete || vm.starting}" ng-click="vm.resumeSurvey()">
+          {{'RESUME_SURVEY' | i18n:vm.lang}}
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>

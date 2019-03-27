@@ -1,0 +1,24 @@
+<div class="section home-section">
+  <div class="row">
+    <div class="col-xs-12">
+      <form name="nextSurveyForm" ng-submit="vm.submit()">
+        <fieldset class="form-group">
+          <div class="col-xs-12">
+            <label for="vm.survey_id">{{'NEXT_SURVEY' | i18n}}</label>
+            <label data-ng-repeat="survey in vm.randoms" class="form-control">
+              <input type="radio" data-ng-model="vm.survey_id" value="{{survey.uuid}}" ng-required="!vm.survey_id">
+              <span>{{survey.name | i18n}}</span>
+            </label>
+          </div>
+        </fieldset>
+        <fieldset class="form-group">
+          <div class="col-xs-12">
+            <button class="btn btn-block btn-primary" ng-class="{disabled: nextSurveyForm.$invalid}" type="submit" >
+              {{'START_SURVEY' | i18n}}
+            </button>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>

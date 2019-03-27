@@ -1,0 +1,59 @@
+<div style="height:100%;">
+  <div class="scrollable-header">
+    <h3 class="app-name"><b>{{'HISTORY' | i18n:language}}</b></h3>
+    <div class="list-group" style="margin-bottom:0">
+      <div class="list-group-item spacer"></div>
+      <a class="list-group-item sidebar-btn btn-primary sidebar-post" ng-class="{disabled: posting}" href="#" ng-click="postResponses()">
+        <b>
+          <span ng-show="!posting"><i class="fa fa-fw fa-upload"></i> {{'POST_RESPONSES' | i18n:language}}</span>
+          <span ng-show="posting"><i class="fa fa-fw fa-spinner fa-pulse"></i> {{'POSTING_RESPONSES' | i18n:language}}</span>
+        </b>
+      </a>
+      <div class="list-group-item">
+        {{'RESPONSES_LAST_POSTED' | i18n:language}}<br>
+        {{responses_last_synced | dateDisplay | i18n:language}}
+      </div>
+      <div class="list-group-item text-center cf" ng-show="responses.length > 0">
+        <a class="btn btn-xs left" ng-class="{disabled: offset === 0, 'btn-default': offset === 0, 'btn-primary': offset > 0}" ng-click="updateResponses(-10)"><i class="fa fa-fw fa-arrow-left"></i></a>
+        <b>{{'RECENT_RESPONSES' | i18n:language}} {{offset+1}}-{{offset+responses.length}}</b>
+        <a class="btn btn-xs right" ng-class="{disabled: offset+responses.length >= total_response_count, 'btn-default': offset+responses.length >= total_response_count, 'btn-primary': offset+responses.length < total_response_count}" ng-click="updateResponses(10)"><i class="fa fa-fw fa-arrow-right"></i></a>
+      </div>
+      <div class="list-group-item" ng-show="responses.length === 0"><em>{{'NO_ENTRIES' | i18n:language}}</em></div>
+    </div>
+  </div>
+  <div class="scrollable-content">
+    <div ng-repeat="response in responses | orderBy:_id:true" class="list-group-item cf">
+      <i class="fa fa-fw fa-cloud-upload right" ng-class="{'text-danger': responses_last_synced === 'NEVER' || response.value > responses_last_synced_time,  'text-success': response.value < responses_last_synced_time && responses_last_synced !== 'NEVER'}"></i>
+      <div ng-show="response.doc.response_info.exit" class="text-center"><b>{{'EARLY_EXIT' | i18n:language}}</b></div>
+      <div ng-show="response.doc.progress" class="text-center">
+        <button class="btn btn-info btn-xs" type="button" ng-click="resumeSurvey(response.doc)"><b>{{'IN_PROGRESS' | i18n:language}}</b></button>
+      </div>
+      <div>
+        {{'RESPONSE_ID' | i18n:language}}: {{response.doc._id}}<br>
+        {{'SURVEY_NAME' | i18n:language}}: {{response.doc.response_info.survey_name | i18n:language}}<br>
+        <span ng-hide="response.doc.response_info.grade === 'NO_GRADE'">{{'GRADE' | i18n:language}}: {{response.doc.response_info.grade}}</span>
+        <span ng-show="response.doc.response_info.grade === 'NO_GRADE'">{{response.doc.response_info.grade | i18n:language}}</span><br>
+        {{'STUDENT_CODE' | i18n:language}}: {{response.doc.response_info.student_unique_code}}
+      </div>
+      <div ng-show="response.doc.response_info.training_entry">
+        {{'TRAINING_ENTRY' | i18n:language}}: {{response.doc.response_info.gold_standard | i18n:language}}
+      </div>
+      <div ng-show="response.doc.response_info.irr_entry">
+        {{'IRR_ENTRY' | i18n:language}}: {{response.doc.response_info.irr_student_code}}
+      </div>
+      <div ng-show="response.doc.response_info.survey_finished">
+        {{'SURVEY_SUBMITTED' | i18n:language}}: {{response.doc.response_info.survey_finished | dateDisplay}}
+      </div>
+      <div ng-show="response.doc.progress">
+        {{'LAST_UPDATED'| i18n:language}}: {{response.doc.progress.updated | dateDisplay}}
+      </div>
+      <!-- <button class="btn btn-xs btn-default right" ng-click="viewResponseModal(response.doc)" ui-turn-on="rv"><i class="fa fa-fw fa-eye"></i></button> -->
+    </div>
+  </div>
+  <div class="scrollable-footer list-group-item" style="border-top:2px solid #aaa;text-align:right">
+    <p>
+      <b>{{'UNSYNCED_MODIFICATIONS' | i18n:language}}: {{unsynced_modifications}}<br>
+      {{'RESPONSE_DEVICE_COUNT' | i18n:language}}: {{total_response_count}}</b>
+    </p>
+  </div>
+</div>

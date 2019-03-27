@@ -1,0 +1,47 @@
+<!-- response view -->
+<div class="modal ng-class:vm.langStyle" ui-if="rv" ui-shared-state="rv">
+  <div class="modal-backdrop in"></div>
+  <div class="modal-dialog">
+    <div class="modal-content" ng-controller="RVCtrl as vm">
+      <div class="modal-header">
+        <h4 class="modal-title">
+          {{'RESPONSE_ID' | i18n}} {{vm.response._id}}
+          <button class="btn btn-default btn-xs right" ng-click="vm.close($event)">X</button>
+        </h4>
+      </div>
+      <div class="modal-body response-modal-body cf">
+        <div class="scrollable-content">
+          <div ng-repeat="task in vm.response.mapped">
+            <h3>{{task.name | i18n}}</h3>
+            <div class="well">
+              <table class="response-table" ng-if="task.renderer !== 'incomplete'">
+                <tbody ng-repeat="question in task.renderer">
+                  <tr ng-if="question.t === 'grid'">
+                    <td colSpan="2">
+                      <div class="{{question.hc}} display-grid">
+                        <div ng-repeat="cell in question.c.grid" class="cell" ng-class="{checked: cell.incorrect, 'last-word': cell.lastRead}">{{cell.name}}</div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr ng-if="question.t === 'grid'">
+                    <td class="response-cell"><span>{{'TIME_ELAPSED' | i18n}}</span></td>
+                    <td class="response-cell">{{question.c.time}}</td>
+                  </tr>
+                  <tr ng-if="question.t === 'grid'">
+                    <td class="response-cell"><span>{{'GRID_AUTOSTOP_EXISTS' | i18n}}</span></td>
+                    <td class="response-cell">{{question.c.autostop}}</td>
+                  </tr>
+                  <tr ng-if="question.t !== 'grid'">
+                    <td class="response-cell"><span ng-bind-html="question.p"></span></td>
+                    <td class="response-cell">{{question.c}}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div ng-if="task.renderer === 'incomplete'">{{'INCOMPLETE_SUBTASK' | i18n}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

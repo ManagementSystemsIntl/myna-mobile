@@ -1,0 +1,169 @@
+// sass --watch www/sass/style.scss:www/css/style.css
+@import "./_vars";
+@import "./_base";
+
+.app-language-rtl {
+  direction: rtl;
+  text-align: right;
+  .left {
+    float: right;
+  }
+  .right {
+    float: left;
+  }
+}
+
+.action-link {
+  color: $text_main;
+}
+.action-link:hover {
+  color: $text_light;
+}
+
+.navbar-app {
+  background-color: $body_main;
+  border: 0;
+  color: $white;
+  .btn {
+    color: $white;
+    padding-top: 6px;
+    line-height: 44px;
+  }
+  .navbar-brand {
+    font-weight: bold;
+    font-family: $font_secondary;
+  }
+}
+.app-name {
+  background-color: $body_light;
+  font-family: $font_secondary;
+  img {
+    margin-right: 10px;
+  }
+}
+.list-group-item {
+  background-color: $white;
+  &.spacer {
+    background-color: #555;
+    border-bottom: 0;
+  }
+  &.app-version {
+    color: $text_main;
+    text-align: center;
+  }
+}
+.normal-list {
+  padding: 0;
+}
+.home-section {
+  margin: 10px;
+}
+ui-switch {
+  margin: auto;
+  &.switch.active {
+    background-color: $body_light;
+    border-color: $body_main;
+    & .switch-handle {
+      border-color: $body_main;
+    }
+  }
+}
+
+input:focus,
+select:focus,
+.form-control:focus {
+  border-color: $text_light;
+}
+.no-padding {
+  padding: 0;
+}
+
+.btn-block:not(.btn-block-normal) {
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: 10px 0;
+  font-size: 1.5em;
+}
+
+.survey-info-table{
+  font-size: 1em;
+  width: 100%;
+  tr {
+    border-bottom:1px solid gray;
+    &:last-child {
+      border-bottom:none;
+    }
+    td {
+      padding:5px 0;
+      &:last-child {
+        text-align: right;
+      }
+    }
+  }
+}
+
+.response-modal-body {
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.response-table {
+  width: 100%;
+  .response-cell {
+    width: 50%;
+    padding: 5px 10px;
+    border: 1px solid gray;
+  }
+}
+
+.sidebar-btn.sync-success{
+  background-color: $success !important;
+}
+.sidebar-btn.sync-fail{
+  background-color: $danger !important;
+}
+
+.type-ahead-container {
+  max-height: 130px;
+  overflow-y: auto;
+  ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  li {
+    padding: 5px;
+    &:nth-child(odd) {
+      background: lighten($gray, 45);
+    }
+  }
+}
+
+.list-group-item.active {
+  color: $black;
+  background-color: $checked_color;
+  border-color: $checked_color;
+}
+
+.timer-button {
+  border-radius: 0;
+  // background-color: $danger !important;
+}
+
+.network-available {
+  display: inline-block;
+  margin-left: 15px;
+  margin-top: 3px;
+  height: 0.9em;
+  width: 0.9em;
+  border:2px solid $white;
+  border-radius: 50%;
+  background-color: #ff2b2b;
+  transition: 1s background-color;
+}
+.network-available.online {
+  background-color: #5ae00d;
+}
+
+
+@import "./_egra_form";
+@import "./_grid";

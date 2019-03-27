@@ -1,0 +1,52 @@
+<!-- geo data -->
+<div class="modal ng-class:vm.langStyle" ui-if="geo" ui-shared-state='geo' ng-cloak>
+  <div class="modal-backdrop in"></div>
+  <div class="modal-dialog">
+    <div class="modal-content" ng-controller="GeoCtrl as vm">
+      <div class="modal-header">
+        <h4 class="modal-title">{{'GEO_MODAL' | i18n}}</h4>
+      </div>
+      <form name="geoForm" ng-submit="vm.submit()">
+        <div class="modal-body cf">
+          <div class="col-xs-12" ng-if="!vm.schools">
+            <label>{{'GEO_SCHOOL_CODE' | i18n}}</label>
+            <input class="form-control" type="tel" pattern="[0-9]*" ng-model="vm.geo.school_code" required>
+          </div>
+          <div class="col-xs-12 margin-top-20" ng-if="!vm.schools">
+            <label>{{'GEO_SCHOOL_CODE_CONFIRM' | i18n}}</label>
+            <input class="form-control" type="tel" pattern="[0-9]*" ng-model="vm.geo.school_code_confirm" required>
+          </div>
+          <div class="col-xs-12" ng-if="vm.schools">
+            <label>{{'GEO_SCHOOL_CODE' | i18n}}</label>
+            <input class="form-control" type="tel" ng-model="vm.geo.school_code" ng-change="vm.updateAutocomplete()" required>
+            <div ng-show="vm.autocomplete.length > 0" class="type-ahead-container">
+              <ul class="type-ahead-list">
+                <li ng-repeat="school in vm.autocomplete" ng-click="vm.setSchoolCode(school.school_id)">{{school.school_id}} - {{school.school_name}} - {{school.location_description}}</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-xs-12 margin-top-20 cf">
+            <button class="btn btn-info btn-xs left" type="button" style="padding:0;margin-right:5px;" ng-class="{disabled: vm.fetching}" ng-click="vm.getGeo()">
+              <i class="fa fa-fw fa-globe fa-lg"></i>
+            </button>
+            <p ng-show="vm.finding">{{'GEO_FETCHING' | i18n}}</p>
+            <div ng-hide="vm.finding">
+              <p>{{'GEO_LATITUDE' | i18n}}&nbsp;
+                <b><span>{{vm.geo.latitude | egraNumber:5 | i18n}}</span></b>,
+                {{'GEO_LONGITUDE' | i18n}}&nbsp;
+                <b><span>{{vm.geo.longitude | egraNumber:5 | i18n}}</span></b>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer cf">
+          <div class="col-xs-12">
+            <button class="btn btn-block btn-primary" ng-class="{disabled: geoForm.$invalid || (vm.geo.school_code && vm.geo.school_code !== vm.geo.school_code_confirm) || vm.finding}" type="submit">
+              {{'SAVE' | i18n}}
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

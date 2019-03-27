@@ -1,0 +1,33 @@
+<div class="navbar navbar-app navbar-absolute-top ng-class:vm.langStyle">
+  <div class="navbar-brand navbar-brand-center">{{vm.title | i18n:vm.language}}</div>
+  <div class="btn-group pull-left">
+    <div ui-toggle="sidebar-left" class="btn sidebar-toggle" ng-class="{disabled: vm.disableSidebar.left}">
+      <i class="fa fa-fw fa-info-circle fa-2x"></i>&nbsp;
+    </div>
+  </div>
+  <div class="btn-group pull-right">
+    <div ui-toggle="sidebar-right" class="btn sidebar-toggle" ng-class="{disabled: vm.disableSidebar.right}">
+      <i class="fa fa-fw fa-2x" ng-class="{'fa-files-o': vm.sidebarState === 'main', 'fa-question-circle': vm.sidebarState === 'survey'}"></i>&nbsp;
+    </div>
+  </div>
+</div>
+<div class="navbar navbar-app navbar-absolute-bottom ng-class:vm.langStyle" ng-show="vm.showBottom || vm.showTimer">
+  <div class="navbar-brand navbar-brand-center" ng-class="{'no-padding': vm.showTimer}">
+    <span ng-show="!vm.showTimer">
+      <img src="./img/png/32x32.png" alt="MSI Myna" style="margin-top:-6px;">&nbsp;&nbsp;{{'MYNA' | i18n:vm.language}}
+    </span>
+    <span ng-show="!vm.showTimer" class="network-available" ng-class="{online: vm.online}" title="{{vm.online ? 'online' : 'offline'}}"></span>
+    <span ng-show="vm.showTimer">
+      <a ng-hide="vm.timer.paused" class="btn btn-warning timer-button col-xs-4" ng-click="vm.pauseTimer()">
+        <i class="fa fa-fw fa-pause"></i>
+      </a>
+      <a ng-show="vm.timer.paused" class="btn btn-success timer-button col-xs-4" ng-click="vm.resumeTimer()">
+        <i class="fa fa-fw fa-play"></i>
+      </a>
+      <span class="btn col-xs-4" style="font-weight:bold;font-size:1.6em;">{{vm.timer.time}}</span>
+      <a class="btn btn-danger timer-button col-xs-4" ng-click="vm.finishTimer(true, false,vm.timer.grid);vm.showTimer = false;">
+        <i class="fa fa-fw fa-stop"></i>
+      </a>
+    </span>
+  </div>
+</div>

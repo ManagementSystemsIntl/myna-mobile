@@ -1,0 +1,36 @@
+<!-- pupil data -->
+<div class="modal ng-class:vm.langStyle" ui-if="pupils" ui-shared-state='pupils'>
+  <div class="modal-backdrop in"></div>
+  <div class="modal-dialog">
+    <div class="modal-content" ng-controller="PupilsCtrl as vm">
+      <div class="modal-header">
+        <h4 class="modal-title">{{'PUPILS_MODAL' | i18n}}</h4>
+      </div>
+      <form name="pupilForm" ng-submit="vm.submit()">
+        <div class="modal-body cf">
+          <div class="col-xs-12" ng-if="vm.pupils">
+            <label>{{'STUDENT_CODE' | i18n}}</label>
+            <input class="form-control" type="tel" pattern="[0-9]*" ng-model="vm.student" ng-change="vm.updateAutocomplete()" required>
+            <div ng-show="vm.autocomplete.length > 0" class="type-ahead-container">
+              <ul class="type-ahead-list">
+                <li ng-repeat="student in vm.autocomplete" ng-click="vm.setStudentCode(student.student_unique_code)">{{student.student_unique_code}} - {{student.name}} - {{student.family_name}}</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-xs-12 margin-top-20 cf">
+            <button class="btn btn-info col-xs-12" type="button" ng-click="vm.generateStudentCode()">
+              <i class="fa fa-fw fa-user"></i>&nbsp;<b>{{'GENERATE_STUDENT_CODE' | i18n:vm.lang}}</b>
+            </button>
+          </div>
+        </div>
+        <div class="modal-footer cf">
+          <div class="col-xs-12">
+            <button class="btn btn-block btn-primary" ng-class="{disabled: pupilForm.$invalid || !vm.valid}" type="submit">
+              {{'SAVE' | i18n}}
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

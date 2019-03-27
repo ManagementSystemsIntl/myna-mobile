@@ -1,0 +1,30 @@
+<!-- enumerator login -->
+<div class="modal ng-class:vm.langStyle" ui-if="enum" ui-shared-state="enum">
+  <div class="modal-backdrop in"></div>
+  <div class="modal-dialog">
+    <div class="modal-content" ng-controller="EnumeratorCtrl as vm">
+      <div class="modal-header">
+        <h4 class="modal-title">{{'ENUMERATOR_MODAL' | i18n}}</h4>
+      </div>
+      <form name="enumForm" ng-submit="vm.submit()">
+        <div class="modal-body cf">
+          <div class="col-xs-12">
+            <label>{{'ENUMERATOR_ID' | i18n}}</label>
+            <input class="form-control" type="tel" ng-model="vm.enumerator.id" required pattern="\d{4}">
+          </div>
+          <div class="col-xs-12 margin-top-20">
+            <label>{{'ENUMERATOR_NAME' | i18n}}</label>
+            <input class="form-control" type="text" ng-model="vm.enumerator.name" required>
+          </div>
+        </div>
+        <div class="modal-footer cf">
+          <div class="col-xs-12">
+            <button class="btn btn-block btn-primary ng-class:(enumForm.$invalid)? 'disabled' : '';" type="submit">
+              {{'SAVE' | i18n}}
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

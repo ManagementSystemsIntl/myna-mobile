@@ -1,0 +1,43 @@
+$body_main: rgb(85, 40, 111);
+$body_light: lighten($body_main, 15);
+$body_hover: lighten($body_main, 30);
+
+$text_main: rgb(209, 84, 23);
+$text_light: lighten($text_main, 15);
+$text_lightest: lighten($text_main, 50);
+
+$font_primary: 'Open Sans', 'Arial', sans-serif;
+$font_secondary: 'Roboto Condensed', 'Arial', sans-serif;
+
+$white: #f0f0f0;
+$black: #333;
+$gray: rgb(119, 119, 119);
+$accent_light: rgb(186, 167, 152);
+$accent_dark: rgb(136, 96, 87);
+
+$checked_color: deepskyblue;
+$last_word_color: red;
+
+$expanded_width: 240px;
+$collapsed_width: 80px;
+
+$success: #4ebf7b;
+$danger: #ef4f4f;
+$warning: #eaa964;
+
+@mixin bootBtnOverride($c, $s){
+  .btn-#{$c} {
+    color: #ffffff !important;
+    background-color: $s !important;
+    border-color: darken($s, 20) !important;
+    &:hover,
+    &:focus,
+    &:active,
+    &:active:focus,
+    &.active {
+      background-color: lighten($s, 20) !important;
+      border-color: $s !important;
+      outline-color: $warning !important;
+    }
+  }
+}

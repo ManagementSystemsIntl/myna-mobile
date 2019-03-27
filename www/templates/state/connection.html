@@ -1,0 +1,33 @@
+<div class="section home-section">
+  <div class="row">
+    <div class="col-xs-12">
+      <form name="connectionForm" ng-submit="vm.submit()">
+        <fieldset class="form-group">
+          <div class="col-xs-12">
+            <label>{{'COHORT_DOMAIN' | i18n}}</label>
+            <input class="form-control" type="text" ng-model="vm.connection.url" required>
+          </div>
+        </fieldset>
+        <fieldset class="form-group">
+          <div class="col-xs-12">
+            <label>{{'COHORT_CODE' | i18n}}</label>
+            <input class="form-control" type="text" ng-model="vm.connection.code" required>
+          </div>
+        </fieldset>
+        <fieldset class="form-group">
+          <div class="col-xs-12">
+            <button class="btn btn-block btn-primary" ng-class="{disabled: connectionForm.$invalid || vm.connecting}" type="submit">
+              <i class="fa fa-fw fa-spin fa-cog" ng-show="vm.connecting"></i>{{'CONNECT' | i18n}}
+            </button>
+            <button class="btn btn-block btn-danger btn-block-normal" type="button" ng-show="vm.error" ng-click="vm.reset()">
+              {{vm.error}}
+            </button>
+            <a class="btn btn-block btn-default btn-block-normal" ng-show="vm.showCancel" ng-class="{disabled: vm.connecting}"  ng-show="vm.connected" ui-sref="app.home">
+              {{'CANCEL' | i18n}}
+            </a>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>

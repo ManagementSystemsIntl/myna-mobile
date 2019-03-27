@@ -1,0 +1,55 @@
+@import "./_fonts";
+
+*{
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  font-family: $font_primary;
+}
+
+.cf::after {
+  display: table;
+  content: "";
+  clear: both;
+}
+
+.left{
+  float: left;
+}
+
+.right{
+  float: right;
+}
+
+.margin-top-20{
+  margin-top: 20px;
+}
+
+.direction_rtl {
+  direction: rtl;
+  // font-family: 'Amiri', sans-serif !important;
+  // h1, h2, h3, h4, h5, h6 {
+  //   font-family: 'Amiri', sans-serif !important;
+  //   line-height: inherit;
+  // }
+}
+
+.direction_ltr {
+  direction: ltr;
+}
+
+.disabled {
+  &.btn, &.sidebar-btn, a {
+    pointer-events: none;
+  }
+}
+
+@include bootBtnOverride("primary", $body_main);
+@include bootBtnOverride("success", $success);
+@include bootBtnOverride("danger", $danger);
+@include bootBtnOverride("warning", $warning);
+@include bootBtnOverride("info", $text_light);

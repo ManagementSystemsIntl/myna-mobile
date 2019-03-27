@@ -1,0 +1,61 @@
+<div style="height:100%;">
+  <div class="scrollable-header">
+    <h3 class="app-name">
+      <b>{{'COHORT_INFO' | i18n:language}}</b>
+    </h3>
+    <div class="list-group" style="margin-bottom:0;">
+      <div class="list-group-item spacer"></div>
+      <a href="#" class="list-group-item btn-primary sidebar-btn" ui-toggle="enum" ui-turn-off="sidebar-left">
+        <b><i class="fa fa-fw fa-user"></i>  {{'TOGGLE_ENUMERATOR_MODAL' | i18n:language}}</b>
+      </a>
+      <div class="list-group-item">
+        {{'ENUMERATOR_ID' | i18n:language}}: {{enumerator.id}}<br>
+        {{'ENUMERATOR_NAME' | i18n:language}}: {{enumerator.name}}
+      </div>
+      <div class="list-group-item spacer"></div>
+      <a href="#" class="sidebar-btn btn-primary list-group-item" ui-toggle="geo" ui-turn-off="sidebar-left">
+        <b><i class="fa fa-fw fa-compass"></i>  {{'TOGGLE_GEO_MODAL' | i18n:language}}</b>
+      </a>
+      <div class="list-group-item">
+        {{'GEO_SCHOOL_CODE' | i18n:language}}: {{geo.school_code}}<br>
+        {{'LAT_LNG' | i18n:language}}: {{geo.latitude | egraNumber:5 | i18n:language}}, {{geo.longitude | egraNumber:5 | i18n:language}}
+      </div>
+      <div class="list-group-item spacer"></div>
+      <a class="sidebar-btn btn-primary list-group-item sidebar-fetch" ng-class="{disabled: fetching}" href="#" ng-click="updateSurveys()">
+        <b>
+          <span ng-show="!fetching"><i class="fa fa-fw fa-cloud-download"></i>  {{'UPDATE_SURVEYS' | i18n:language}}</span>
+          <span ng-show="fetching"><i class="fa fa-fw fa-spinner fa-pulse"></i>  {{'UPDATING_SURVEYS' | i18n:language}}</span>
+        </b>
+      </a>
+      <div class="list-group-item">
+        {{'SURVEYS_LAST_SYNCED' | i18n:language}}<br>
+        {{surveys_last_synced | dateDisplay:language}}
+      </div>
+      <div class="list-group-item" ng-click="showSurveys = !showSurveys">
+        <b>{{'SURVEYS_AVAILABLE' | i18n:language}} ({{surveys.length}})  <i class="fa fa-fw" ng-class="{'fa-caret-up': !showSurveys, 'fa-caret-down': showSurveys}"></i></b>
+      </div>
+    </div>
+  </div>
+  <div class="scrollable-content">
+    <div ng-repeat="survey in surveys" class="list-group-item" ng-show="showSurveys">
+      <i class="fa fa-fw" ng-class="{'fa-file':survey.doc_type=='schema', 'fa-link':survey.doc_type=='schema-family'}"></i> {{survey.survey_info.name | i18n:language}} (v.{{survey.survey_info.iteration}})
+    </div>
+  </div>
+  <div class="scrollable-footer">
+    <div class="list-group" style="margin-bottom:0;">
+      <a class="sidebar-btn btn-danger list-group-item" ui-turn-off="sidebar-left" ui-sref="app.connection">
+        <b><i class="fa fa-fw fa-sign-out"></i> {{'TOGGLE_CONNECTION_SETTINGS' | i18n:language}}</b>
+      </a>
+      <div class="list-group-item">
+        {{'COHORT' | i18n:language}}: {{connection.group_name}}<br>
+        {{'COHORT_DOMAIN' | i18n:language}}: {{connection.url}}
+      </div>
+      <div class="list-group-item">
+        <select class="form-control" ng-model="languageObj" ng-options="language as language.display for language in languages" ng-change="updateLanguage()"></select>
+      </div>
+      <div class="list-group-item app-version">
+        <i class="fa fa-fw fa-code"></i>  <em><b>{{'VERSION' | i18n:language}} {{version}}</b></em>
+      </div>
+    </div>
+  </div>
+</div>

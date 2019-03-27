@@ -1,0 +1,14 @@
+# http://git-scm.com/docs/gitignore
+
+node_modules/
+platforms/
+built/
+www2/
+electron-builds/
+plugins/
+hooks/
+resources/
+www/shared/lib
+.sass-cache
+*/relics/
+/.idea/*

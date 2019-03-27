@@ -1,0 +1,4 @@
+<div class="timer-inner">
+  <a class="btn btn-warning btn-circle reset-timer col-xs-12" ng-class="{disabled: disabled}" ng-click="resetTimer()" data-ng-show="running && !finished">{{'TIMER_RESET' | i18n}}</a>
+  <a class="btn btn-success btn-block col-xs-12" ng-class="{disabled: disabled}" ng-click="startTimer()" data-ng-show="!running && !finished">{{'TIMER_START' | i18n}}: {{time}}</a>
+</div>
