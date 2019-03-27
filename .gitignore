@@ -11,4 +11,4 @@ resources/
 www/shared/lib
 .sass-cache
 */relics/
-/.idea/*
+.idea/*

@@ -42,6 +42,6 @@
         <variable name="XWALK_MODE" value="embedded" />
         <variable name="XWALK_MULTIPLEAPK" value="true" />
     </plugin>
-    <engine name="browser" spec="^5.0.3" />
-    <engine name="android" spec="^7.1.1" />
+    <engine name="browser" spec="^5.0.4" />
+    <engine name="android" spec="^7.1.4" />
 </widget>
