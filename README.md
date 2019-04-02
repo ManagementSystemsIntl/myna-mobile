@@ -23,7 +23,7 @@ npm install cordova@8.1.2
 Clone the repository to your local machine.
 
 ```bash
-git clone this-repo/myna-mobile.git
+https://github.com/ManagementSystemsIntl/myna-mobile.git
 ```
 
 Change to your project's directoy and run the cordova commmand below to run a version of the application in your web browser.
