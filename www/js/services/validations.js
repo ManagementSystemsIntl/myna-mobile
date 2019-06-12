@@ -21,6 +21,7 @@
           var condition = angular.copy(question.condition)
             .replace(/vm\.grids\./g, "grids.")
             .replace(/vm\.surveymodel/g, "response");
+          // console.log(question);
           var passes = eval(condition);
           if (!passes) {
             p[key] = true;
@@ -30,8 +31,10 @@
         if (key.match(/_consent$/)) {
           p[key] = validateConsent(response[key]);
         } else if (question.htmlClass && question.htmlClass.match(/^grid/)) {
-          // var grid = grids[question.name];
-          var grid = grids[key];
+          var grid_without_key = key.replace('_grid', '');
+          // console.log(key);
+          // console.log(grids);
+          var grid = grids[grid_without_key];
           p[key] = validateGrid(grid);
         } else if (schema.properties[key].type === "string" && schema.properties[key].hasOwnProperty("enum")) {
           p[key] = validateEnumString(response[key], schema.properties[key].enum);
