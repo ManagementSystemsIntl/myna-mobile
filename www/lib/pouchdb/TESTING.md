@@ -25,13 +25,18 @@ or you can run:
 
 and open [http://127.0.0.1:8000/tests/integration/index.html](http://127.0.0.1:8000/tests/integration/index.html) in your browser of choice. The performance tests are located @ [http://localhost:8000/tests/performance/index.html](http://localhost:8000/tests/performance/index.html).
 
+You can also test against phantomjs, but you'll need to install phantomjs yourself:
+
+    $ npm install phantomjs-prebuilt
+    $ CLIENT=selenium:phantomjs npm test
+
+To test a specific plugin in the browser run:
+
+    $ TYPE=find PLUGINS=pouchdb-find npm run dev
+
 ### Unit tests
 
-    $ npm run build-as-modular-es5
     $ npm run test-unit
-
-These are tests that confirm small parts of PouchDB functionality. In order to
-work correctly with ES6, they are first transpiled to `lib` as modular ES5 (`run run build-as-modular-es5`) using Babel, and then tested as CommonJS modules. See `build-as-modular-es5.sh` for details.
 
 ### Test Options
 
@@ -44,9 +49,6 @@ or append `?grep=test.replication.js` if you opened the tests in a browser manua
 #### Test Coverage
 
     $ npm run test-coverage
-
-Again, this uses `npm run build-as-modular-es5` in order to fully test the codebase
-as a non-bundle. See `build-as-modular-es5.sh` for details.
 
 #### Test alternative server
 
@@ -63,6 +65,12 @@ or
 * `POUCHDB_SRC=../../dist/pouchdb.js` can be used to treat another file as the PouchDB source file.
 * `npm run test-webpack` will build with Webpack and then test that in a browser.
 
+#### Test against custom Firefox
+
+You can specify a custom Firefox path using `FIREFOX_BIN`
+
+    $ FIREFOX_BIN=/path/to/firefox npm run test-browser
+
 #### Run the map/reduce tests
 
 The map/reduce tests are done separately from the normal integration tests, because
@@ -70,6 +78,12 @@ they take a long time. They'll also cause a ton of popups in Safari due to excee
 the 5MB limit.
 
     $ TYPE=mapreduce npm test
+
+#### Run the pouchdb-find tests
+
+These are similar to the map/reduce tests:
+
+    $ TYPE=find PLUGINS=pouchdb-find npm test
 
 ### Testing against PouchDB server
 
@@ -90,25 +104,23 @@ Then in the PouchDB project, run:
 
 This works because `npm run dev` does not start up the pouchdb-server itself (only `npm test` does).
 
-### Testing the in-memory adapter
+Note that you must `npm install pouchdb-server` or `npm install express-pouchdb` yourself for this test to work.
 
-`pouchdb-server` uses the `--in-memory` flag to use MemDOWN.  To enable this, set
+### Testing different Node adapters
 
-    SERVER_ADAPTER=memory
+Use this option to test the in-memory adapter:
 
-Whereas on the client this is configured using `PouchDB.defaults()`, so you can enable it like so:
-
-    LEVEL_ADAPTER=memdown
-
-The value is a comma-separated list of key values, where the key-values are separated by colons.
-
-Some Level adapters also require a standard database name prefix (e.g. `riak://` or `mysql://`), which you can specify like so:
-
-    LEVEL_PREFIX=riak://localhost:8087/
+    ADAPTER=memory
 
 To run the node-websql test in Node, run the tests with:
 
     ADAPTER=websql
+
+### Testing fetch vs XMLHttpRequest
+
+PouchDB falls back to either XHR or fetch, whichever is available. You can test fetch-only using:
+
+    FETCH=1 npm test
 
 ### Performance tests
 
@@ -132,6 +144,10 @@ You can also test against node-websql:
 
     PERF=1 ADAPTER=websql npm test
 
+You can also override the default number of iterations:
+
+    PERF=1 ITERATIONS=10 npm t
+
 ### Performance tests in the browser
 
 When you run `npm run dev`, performance tests are available at:
@@ -150,6 +166,10 @@ You can also specify particular tests by using `grep=`, e.g.:
 
     http://127.0.0.1:8000/tests/performance/index.html?grep=basics
     http://127.0.0.1:8000/tests/performance/index.html?grep=basic-inserts
+
+You can also override the default number of iterations using `iterations=`:
+
+    http://127.0.0.1:8000/tests/performance/index.html?grep=basic-insert&interations=10
 
 ### Ad-hoc tests
 
@@ -199,6 +219,14 @@ Or even make the `preferredAdapters` list anything you want:
     http://localhost:8000/tests/index.html?adapters=websql,memory,idb,localstorage
 
 Keep in mind that `preferredAdapters` only applies to non-http, non-https adapters.
+
+You can also inject (comma-separated) plugins into any test:
+
+    PLUGINS=pouchdb-find npm test
+
+Or as a query param:
+
+    http://localhost:8000/tests/index.html?plugins=pouchdb-find
 
 ### Installing a CouchDB server
 

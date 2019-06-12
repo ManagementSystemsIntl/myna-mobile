@@ -1,0 +1,16 @@
+extends: tlvince
+globals:
+  angular: false
+rules:
+  newline-after-var: 0
+  no-continue: 0
+  spaced-comment: 0
+  array-bracket-spacing: 0
+  jasmine/no-suite-dupes:
+    - 2
+    - branch
+  jasmine/no-spec-dupes:
+    - 2
+    - branch
+plugins:
+  - jasmine

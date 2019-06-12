@@ -1,0 +1,17 @@
+sudo: false
+language: node_js
+node_js:
+  - '4'
+cache:
+  directories:
+    - node_modules
+notifications:
+  email: false
+before_script:
+  - npm prune
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+after_success:
+  - npm run semantic-release
+  - npm run publish-repo
+  - npm run coveralls
